@@ -19,7 +19,7 @@ def init_db():
     with connect() as conn:
         with conn.cursor() as cur:
             cur.execute("""
-                CREATE TABLE IF NOT EXISTS second (
+                CREATE TABLE IF NOT EXISTS channelss (
                     id BIGINT PRIMARY KEY,
                     title TEXT,
                     members INTEGER,
@@ -35,7 +35,7 @@ def add_or_update_channel(chat_id, title, members, chat_type="unknown", link="")
     with connect() as conn:
         with conn.cursor() as cur:
             cur.execute("""
-                INSERT INTO second (id, title, members, type, link)
+                INSERT INTO channelss (id, title, members, type, link)
                 VALUES (%s, %s, %s, %s, %s)
                 ON CONFLICT (id) DO UPDATE
                 SET title = EXCLUDED.title,
@@ -49,7 +49,7 @@ def increment_video_count(chat_id):
     with connect() as conn:
         with conn.cursor() as cur:
             cur.execute("""
-                UPDATE second SET videos = videos + 1 WHERE id = %s;
+                UPDATE channelss SET videos = videos + 1 WHERE id = %s;
             """, (chat_id,))
         conn.commit()
 
@@ -58,7 +58,7 @@ def get_channels():
         with conn.cursor() as cur:
             cur.execute("""
                 SELECT id, title, members, videos, date_added, type, link
-                FROM second ORDER BY title;
+                FROM channelss ORDER BY title;
             """)
             return cur.fetchall()
 

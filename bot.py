@@ -25,7 +25,7 @@ from database import (
     increment_video_count,
 )
 
-TOKEN = os.getenv("BOT_TOKEN", "8491473858:AAHLdocop0fyhwZLvM6iaVbbgmdYVRLDStE")
+TOKEN = os.getenv("BOT_TOKEN", "8338461697:AAHfuiVu1iirgPyVXQecY6NNt0t-iIXAwEE")
 logging.basicConfig(level=logging.INFO)
 
 # Главное меню
